@@ -1,0 +1,36 @@
+---
+title: "GitHubUpload"
+author: "Max Strul"
+format: html
+editor: visual
+---
+
+```{r}
+#load libraries
+library(ggplot2)
+#Load data
+covid_data <- read.csv("~/Desktop/Classes/FirstYearExam/FirstYearExamq10/covid19_variants.csv")
+#analyze data
+head(covid_data)
+#make new data frame with only california data
+california_data <- covid_data[covid_data$area=="California",]
+#make the data for dates the "Date" data type
+california_data$date <- as.Date(california_data$date)
+#remove other and total data
+cleaned_data_cal <- california_data[california_data$variant_name!="Other",]
+cleaned_data_cal <- california_data[california_data$variant_name!="Total",]
+#set the data to be from jan 2021 to may 2022
+cleaned_data_cal <- cleaned_data_cal[cleaned_data_cal$date>=as.Date("2021-01-01")
+                                     &cleaned_data_cal$date<=as.Date("2022-05-01"),]
+#plot it 
+ggplot(data=cleaned_data_cal)+
+  aes(x=date,y=percentage,col=variant_name)+
+  geom_line()+
+  theme_bw()+
+  ylab("Percentage of sequenced specimens")+
+  labs(caption = "Data Source: <https://www.cdph.ca.gov/>")+
+  scale_x_date(date_breaks = "month",date_labels = "%b %Y")+ 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+  xlab("")+ggtitle("Covid-19 Variants in California")
+```
+Figure 1: Plot for Q10.
