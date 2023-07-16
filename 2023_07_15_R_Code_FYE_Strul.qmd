@@ -1,10 +1,13 @@
 ---
 title: "GitHubUpload"
 author: "Max Strul"
-format: html
+format: pdf
 editor: visual
 ---
 
+# This is my first year exam bioinformatics section
+## This section is the code for question 10 asking for a covid-19 variants graph
+## this will be uploaded to github. 
 ```{r}
 #load libraries
 library(ggplot2)
